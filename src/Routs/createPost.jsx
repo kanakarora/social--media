@@ -4,45 +4,41 @@ import {useNavigate} from "react-router-dom";
 const CreatePost = () =>{
   const {addPost} = useContext(PostListOperations);
 
-   const naviGate = useNavigate();
+   const navigate = useNavigate();
      const userIdElement = useRef();
      const postTitleElement = useRef();
      const postBodyElement = useRef();
-     
      const tagsElement = useRef();
 
      const handleSubmit = (e)=>{
         e.preventDefault();
-
-
-        const userId = userIdElement.current.value;
+      const userId = userIdElement.current.value;
        const postTitle = postTitleElement.current.value;
         const postBody = postBodyElement.current.value;
        const tags = tagsElement.current.value.split(" ");
        
-       
-      
-
-       let loggedUserList = localStorage.getItem('loggedUserList');
+       let loggedUserList = localStorage.getItem('loggedUsersList');
+       console.log(loggedUserList);
        
        if(loggedUserList){
-       const getLoggedUserList = JSON.parse(localStorage.getItem('loggedUserList'));
+       const getLoggedUserList = JSON.parse(localStorage.getItem('loggedUsersList'));
+       console.log(getLoggedUserList);
        
         getLoggedUserList.map(user=>{
-            if (user.user.userName === userId){
+            if (user.Newuser.userName === userId){
             try{
               
             addPost(userId,postTitle,postBody,tags);
-            naviGate("/")
+            navigate("/")
             }
             catch(err){
               console.log(err);
             }
             
               }
-          else if (getLoggedUserList.length === 0 || user.user.userName !== userId){
+          else if (getLoggedUserList.length === 0 || user.Newuser.userName !== userId){
             alert("you have not created an account");
-            naviGate("/signup");
+            navigate("/signup");
             
            }
         })
