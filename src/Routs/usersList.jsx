@@ -9,8 +9,9 @@ const UserList = () => {
         {loggedUserList && loggedUserList.length>0?
           (<ul >
             {loggedUserList.map((user) => {
+             console.log(user)
                 return (
-                    <User key={user.id} {...user} />
+                    <User key={new Date().getMilliseconds()} user ={user} />
        )
             }
             )}

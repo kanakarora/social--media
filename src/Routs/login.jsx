@@ -1,25 +1,25 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 
 import "../styles/App.css";
 import { useContext } from "react";
 import { UserListOperations } from "../components/store/user-list-store";
-import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
 
 function Login(){
   
   const{register,handleSubmit,reset,formState:{errors}}=useForm();
-  const {addUser,loginMessage} =useContext(UserListOperations) ;
+  const {addUser} =useContext(UserListOperations) ;
  
   const handleLogin = (signedUpUser) =>{
-      
       addUser(signedUpUser);
       reset();
      
        
   }
+
+  
   return(
     <>
      <form onSubmit={handleSubmit(handleLogin)}>
@@ -35,7 +35,7 @@ function Login(){
      <input name ="password"  type="password" className="form-control" id="exampleInputPassword1" {...register("password",{required:true})}/>
      {errors.password && <p style={{fontSize:"20px", color:"red"}}>{errors.password.type === "required"?"fill this field":"invalid password"}</p>  }
    </div>
-   {!loginMessage && <h1>invalid credentials fill the fields correctly</h1> }
+
    <button type="submit" className="btn btn-primary">Submit</button>
    
  </form>

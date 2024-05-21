@@ -24,24 +24,22 @@ const CreatePost = () =>{
        const getLoggedUserList = JSON.parse(localStorage.getItem('loggedUsersList'));
        console.log(getLoggedUserList);
        
-        getLoggedUserList.map(user=>{
+       if (getLoggedUserList.length>0) {getLoggedUserList.map(user=>{
             if (user.Newuser.userName === userId){
-            try{
-              
+           
             addPost(userId,postTitle,postBody,tags);
             navigate("/")
-            }
-            catch(err){
-              console.log(err);
-            }
-            
-              }
-          else if (getLoggedUserList.length === 0 || user.Newuser.userName !== userId){
+             }
+          else{
             alert("you have not created an account");
             navigate("/signup");
             
            }
         })
+      }
+      else {
+        alert ("create account to make posts");
+      }
        }
      
        
@@ -61,22 +59,22 @@ const CreatePost = () =>{
     <div className="form-group">
       
       <label htmlFor="userId">Enter your user Name here</label>
-      <input ref={userIdElement} type="text" className="form-control text-light " id="userId" aria-describedby="emailHelp" placeholder="Enter userId here"/>
+      <input ref={userIdElement} type="text" className="form-control text-light " id="userId" aria-describedby="emailHelp" placeholder="Enter userId here" required/>
       
     </div>
     <div className="form-group ">
       <label htmlFor="title">Post Title</label>
-      <input ref={postTitleElement} type="text" className="form-control " id="title" placeholder="How are you feeling today"/>
+      <input ref={postTitleElement} type="text" className="form-control " id="title" placeholder="How are you feeling today" required/>
     </div>
     
     <div className="form-group ">
       <label htmlFor="postContent">Post Content</label>
-      <textarea ref={postBodyElement} type="text" className="form-control " rows="4" id="postContent" placeholder="describe your post"/>
+      <textarea ref={postBodyElement} type="text" className="form-control " rows="4" id="postContent" placeholder="describe your post" required/>
     </div>
    
     <div className="form-group ">
       <label htmlFor="tags">Enter your hashtags here</label>
-      <input ref={tagsElement} type="text" className="form-control " id="tags" placeholder="tags"/>
+      <input ref={tagsElement} type="text" className="form-control " id="tags" placeholder="tags" required/>
       <small>please put space between tags</small>
     </div>
     

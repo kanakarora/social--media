@@ -36,7 +36,7 @@ const reducer = (users, action) => {
         }
     }
     if (action.type === ACTIONS.ADD_USER) {
-        const { signedUpUser, navigate ,setLogginMessage} = action.payload;
+        const { signedUpUser, navigate } = action.payload;
         if (getUserList && getLoggedUsers) {
             
             const loggedUsersList = JSON.parse(getLoggedUsers);
@@ -49,11 +49,11 @@ const reducer = (users, action) => {
             loggedUsersList.push(LoggedUser);
             localStorage.setItem('loggedUsersList',JSON.stringify(loggedUsersList))
             navigate("/")
-            setLogginMessage(true);
+            
            }
            else{
-            alert("invalid credentials check the email and password or add account");
-                setLogginMessage(false);
+            alert("invalid credentials check the email and password or add new account");
+               
            }
         }
 
@@ -61,7 +61,7 @@ const reducer = (users, action) => {
 
     if(action.type===ACTIONS.REMOVE_USER){
         const {setLoggedUserList,userId,setLogOut,logOut,loggedUserList} = action.payload;
-            const UpdatedUsers = loggedUserList.filter(user=>  user.user.userName !== userId)
+            const UpdatedUsers = loggedUserList.filter(user=>  user.Newuser.userName !== userId)
                  
                   setLoggedUserList(UpdatedUsers);
             localStorage.setItem("loggedUsersList",JSON.stringify(UpdatedUsers));
@@ -79,7 +79,7 @@ const reducer = (users, action) => {
 const Userprovider = ({ children }) => {
     const navigate = useNavigate();
     const [loggedUserList, setLoggedUserList] = useState([]);
-    const [loginMessage,setLogginMessage] = useState(false);
+    // const [loginMessage,setLogginMessage] = useState(false);
     const [users, dispatch] = useReducer(reducer, []);
     const [logOut,setLogOut] = useState(false);
 
@@ -95,7 +95,7 @@ const Userprovider = ({ children }) => {
     const addUser = (signedUpUser) => {
         dispatch({
             type: ACTIONS.ADD_USER,
-            payload: { signedUpUser, navigate,setLogginMessage}
+            payload: { signedUpUser, navigate}
         })
     }
     const removeUser = (userId) => {
@@ -111,7 +111,7 @@ const Userprovider = ({ children }) => {
     const handleUserList = () => {
         const newUserList = JSON.parse(localStorage.getItem('loggedUsersList'));
         if (newUserList) {
-            
+            console.log(newUserList);
             setLoggedUserList(newUserList);
         }
       
@@ -127,7 +127,7 @@ const Userprovider = ({ children }) => {
 
     
     return (
-        <UserListOperations.Provider value={{ loggedUserList, users, addUser, removeUser, handleUserList, signUpUser ,loginMessage}}>
+        <UserListOperations.Provider value={{ loggedUserList, users, addUser, removeUser, handleUserList, signUpUser }}>
             {children}
         </UserListOperations.Provider>
     )
