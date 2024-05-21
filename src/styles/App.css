@@ -1,0 +1,112 @@
+
+.my-app{
+    display: flex;
+    
+}
+.header{
+    flex-basis: 100%;
+    
+}
+.header>header{
+    display: flex;
+    
+}
+header>div{
+    width: 100%;
+    flex-basis: 0 0 100%;
+}
+.sideBar{
+    min-height: 700px;
+    margin-bottom: 0;
+    box-shadow: 0 0 10px 10px #02131a;
+}
+.form-container{
+     position: relative;
+     top:30%;
+     padding-top: 1.2rem;
+     margin-bottom: 4em;
+     transform: translateY(-50%);
+     border-radius: 50px;
+     
+}
+form{
+    padding:10px 50px;
+    width: 50%;
+    margin: auto;
+    font-size: 2em;
+    
+}
+form input{
+    outline-style:solid ;
+    outline-color: rgb(87, 82, 82);
+    font-weight: 200;
+}
+input,input::placeholder{
+    font-size: 2em;
+    
+}
+.card-content-box{
+     height: 400px;
+}
+::-webkit-scrollbar {
+    width: 5px;
+    height: 10px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #1a99e2; 
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+  }
+  
+.footer{
+    display: block;
+    
+}
+.welcome{
+   margin: 0 auto;
+    margin-bottom: 20px;
+    width: 350px;
+    animation-duration: 3s;
+    animation-name: move;
+   
+    position: relative;
+    
+}
+.spinner {
+    margin: 10% 0;
+   padding: 2.5rem;
+    color:rgb(59, 59, 191);
+  }
+@keyframes move{
+  from {
+  left:0%;
+  }
+  to{
+    left:50%;
+    transform: translateX(-50%);
+  }
+}
+
+@media (max-width:630px){
+    form{
+       
+       width: 100%;
+    }
+}
+
+@media (max-width:700px){
+.col{
+    flex:0 1;
+    margin: 0 auto;
+}
+}
