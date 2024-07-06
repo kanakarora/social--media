@@ -1,21 +1,50 @@
 import { MdDelete } from "react-icons/md";
 import { PostListOperations } from "../components/store/post-list-store";
 import { useContext, useState } from "react";
+import { IconContext } from "react-icons";
 import { IoMdHeartEmpty } from "react-icons/io";
-
-// import Lottie from "lottie-react";
-// import Reacton from "./reaction.json";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {  FaThumbsUp, FaThumbsDown ,FaRegThumbsUp , FaRegThumbsDown   } from "react-icons/fa6";
+import { } from "react-icons/fa6";
 
 const Post = ({post}) =>{
-  
+ 
   const {deletePost} = useContext(PostListOperations);
   
-  const [reactions,setReactions] = useState(post.reactions);
- 
+  const [likes,setLikes] = useState(post.reactions.likes);
+  const [disLikes,setDisLikes] = useState(post.reactions.dislikes);
+   
+  const [likeBtn,setLikeBtn] = useState(false) ;
+  const [dislikeBtn , setDisLikeBtn] = useState(false);
 
-   const handleReactions =()=>{
-       setReactions (reactions=>reactions+1)
-   }
+ 
+  const handleLikes = () =>{
+    
+    if(likeBtn === false){
+      setLikeBtn(true);
+      setLikes(likes=>likes+1)
+    }
+
+    else {
+       
+       setLikeBtn(false);
+      setLikes (likes => likes-1)
+    }
+  }
+
+  const handleDisLikes = () =>{
+ 
+   if(dislikeBtn === false){
+    setDisLikeBtn(true);
+      setDisLikes(disLikes=>disLikes+1);
+    }
+    else{
+        setDisLikeBtn(false);
+      setDisLikes(disLikes => disLikes-1);
+    }
+  }
+
+ 
     return (
      
       <div className="col mt-4 card-content-box">
@@ -33,11 +62,16 @@ const Post = ({post}) =>{
 
       
         
-       <div className="my-2 w-25  mx-4 ">
-       <span className="mx-1 mt-0" onClick={handleReactions}> <IoMdHeartEmpty style={{fontSize:"30px"}} /></span>
-        
-        <span style={{fontSize:"20px"}}>{reactions}</span>
+       <div className="my-2 w-100">
+       <span className="mx-0 mt-0" onClick={handleLikes}>
+       { likeBtn ? <FaThumbsUp style={{fontSize:"30px"}}/> : <FaRegThumbsUp style={{fontSize:"30px"}}/> }
+        </span>
+       <span style={{fontSize:"20px"}}>{likes}</span>
+        <span className="mx-1 mt-0" onClick={handleDisLikes}>{ dislikeBtn ?<FaThumbsDown style={{fontSize:"30px"}} /> :<FaRegThumbsDown style={{fontSize:"30px"}}/>}</span>
+       
+        <span style={{fontSize:"20px"}}>{disLikes}</span>
         </div>
+      
    
   {post.tags.map(tag=>{
     

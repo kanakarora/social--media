@@ -43,7 +43,7 @@ const PostListProvider = ({ children }) => {
         title: postTitle,
         body: postBody,
         userId:userId,
-       reactions:0,
+       reactions:{likes:Math.floor(Math.random()*500)+50,dislikes:Math.floor(Math.random()*150)},
         tags: tags,
       },
     });

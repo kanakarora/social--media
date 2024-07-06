@@ -18,9 +18,7 @@ const  {addInitialPosts} = useContext(PostListOperations);
     setToggler(!toggler)
   }
   const [selectedTab,setSelectedTab] = useState("home")
-  const changeTab=()=>{
-    selectedTab("createPost")
-  }
+
   const posts = useLoaderData();
 
   try{ useEffect(() => {

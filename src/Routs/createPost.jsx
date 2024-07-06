@@ -5,6 +5,10 @@ const CreatePost = () =>{
   const {addPost} = useContext(PostListOperations);
 
    const navigate = useNavigate();
+
+    const SignupNavigate = ()=>{
+      navigate("signup")
+    }
      const userIdElement = useRef();
      const postTitleElement = useRef();
      const postBodyElement = useRef();
@@ -18,11 +22,11 @@ const CreatePost = () =>{
        const tags = tagsElement.current.value.split(" ");
        
        let loggedUserList = localStorage.getItem('loggedUsersList');
-       console.log(loggedUserList);
+       
        
        if(loggedUserList){
        const getLoggedUserList = JSON.parse(localStorage.getItem('loggedUsersList'));
-       console.log(getLoggedUserList);
+     
        
        if (getLoggedUserList.length>0) {getLoggedUserList.map(user=>{
             if (user.Newuser.userName === userId){
@@ -31,10 +35,9 @@ const CreatePost = () =>{
             navigate("/")
              }
           else{
-            alert("you have not created an account");
-            navigate("/signup");
-            
-           }
+            alert("you have not created an account or logged in");
+          
+            } 
         })
       }
       else {

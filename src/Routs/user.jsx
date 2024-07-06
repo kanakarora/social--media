@@ -3,7 +3,7 @@ import "../styles/userCard.css";
 import {Link} from "react-router-dom";
 import { UserListOperations } from "../components/store/user-list-store";
 const User = ({user}) =>{
-    console.log(user);
+    
   const {removeUser} = useContext(UserListOperations);
     const handleLogOut=(userId)=>{
         removeUser(userId)

@@ -8,36 +8,58 @@ import Post from "./post";
  const UserInfo = () =>{
     const {userId}  = useParams();
     
-    const [userPosts,setUserPosts] = useState([]); 
+    const [userPosts,setUserPosts] = useState(null); 
     const [fetching,setFetching] = useState(false);
+    const [noPostsMessage,setNoPostsMessage] = useState(false);
+
    const {Posts} = useContext(PostListOperations);
  
    useEffect(()=>{
-     setFetching(true);
-     try{
+    try{
      if(Posts && Posts.length>0){
-       const filterdPosts = Posts.filter(post=>{
+        
+        const filterdPosts = Posts.filter(post=>{
          return post.userId.toString()===userId})
-         setUserPosts(filterdPosts);
-         console.log(filterdPosts);
-         setFetching(false);
+         if(filterdPosts && filterdPosts.length>0){
+          setFetching(true);
+          setUserPosts(filterdPosts);
+          setFetching(false);
+          setNoPostsMessage(false);
+         }
+        else{
+          setNoPostsMessage(true)
+        }
+
      }
     }
     catch(err){
       alert(err.message);
     }
    },[])
-   console.log(userPosts);
+
+//    const showUserPosts = () =>{
+//     if(userPosts &&){
+//       userPosts.map(post=>{
+//         return <Post key={post.id} post = {post}/>
+//     })
+//   }
+//   else if(noPostsMessage){
+//     return <p>This user not created any post</p>
+// }
+//    }
+  
 
    return (<>
      {fetching?<Loading/>:
      <div className="container text-center">
       <div className="row">
-     {userPosts.map(post=>{
+     {userPosts && !noPostsMessage ? userPosts.map(post=>{
       return <Post key={post.id} post = {post}/> 
-     
-     })
+      
+     }) :  <center style={{fontSize:"50px",marginTop:"7vw"}}>***this user have no posts ***</center>
     }
+   
+
     </div>
    </div>
    }

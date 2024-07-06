@@ -4,7 +4,6 @@ import Post from "./post";
 import { PostListOperations } from "../components/store/post-list-store";
 import WelcomeMsg from "../components/welcomemsg";
 import { UserListOperations } from "../components/store/user-list-store";
-import { RiH1 } from "react-icons/ri";
 
 
 
