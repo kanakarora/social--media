@@ -37,16 +37,7 @@ import Post from "./post";
     }
    },[])
 
-//    const showUserPosts = () =>{
-//     if(userPosts &&){
-//       userPosts.map(post=>{
-//         return <Post key={post.id} post = {post}/>
-//     })
-//   }
-//   else if(noPostsMessage){
-//     return <p>This user not created any post</p>
-// }
-//    }
+
   
 
    return (<>
